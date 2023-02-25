@@ -7,7 +7,7 @@ import { EditionMetadataWithOwnerOutputSchema } from '@thirdweb-dev/sdk';
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
-  const { contract } = useContract('0xF3b46a5df8FE9D05C9aB7e6326A312F282607c55');
+  const { contract } = useContract(import.meta.env.VITE_CONTRACT);
   const { mutateAsync: createCampaign } = useContractWrite(contract, 'createCampaign');
 
   const address = useAddress();
@@ -21,7 +21,7 @@ export const StateContextProvider = ({ children }) => {
         form.description, // description
         form.target,
         new Date(form.deadline).getTime(), // deadline,
-        form.image
+        form.image,
       ])
 
       console.log("contract call success", data)
